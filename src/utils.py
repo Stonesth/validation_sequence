@@ -1,10 +1,11 @@
-def adjust_sequence(lines, start_line):
-    previous_sequence = int(lines[start_line - 1][3:6])
-    previous_value = lines[start_line - 1][3:6]
+def adjust_sequence(lines, start_line, start_position, end_position):
+    previous_sequence = int(lines[start_line - 1][start_position:end_position])
+    previous_value = lines[start_line - 1][start_position:end_position]
+    sequence_length = end_position - start_position
     
     for i in range(start_line, len(lines)):
         try:
-            current_value = lines[i][3:6]
+            current_value = lines[i][start_position:end_position]
             current_sequence = int(current_value)
         except ValueError:
             continue
@@ -13,8 +14,8 @@ def adjust_sequence(lines, start_line):
             new_sequence = previous_sequence + 1
             group_value = current_sequence
             for j in range(i, len(lines)):
-                if lines[j][3:6] == current_value:
-                    lines[j] = lines[j][:3] + f"{new_sequence:03}" + lines[j][6:]
+                if lines[j][start_position:end_position] == current_value:
+                    lines[j] = lines[j][:start_position] + f"{new_sequence:0{sequence_length}}" + lines[j][end_position:]
                 else:
                     break
             previous_sequence = new_sequence
