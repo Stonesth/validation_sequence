@@ -169,3 +169,9 @@ cython_debug/
 
 # PyPI configuration file
 .pypirc
+
+# Ignorer le dossier files
+files
+
+# Ignorer le dossier output
+output
