@@ -22,6 +22,18 @@ def adjust_sequence(lines, start_line, start_position, end_position):
         else:
             previous_sequence = current_sequence
     
+    # Adjust the last line
+    last_line_index = len(lines) - 1
+
+    # Nbr of row - 2 equal the nbrofrow that we need to put in the last line
+    # need to place 0 to complete the 6 digits
+    nbrofrow = len(lines) - 2
+    nbrofrow = f"{nbrofrow:0{6}}"
+    
+    # the position that I need to modified is the last line
+    # and begin at the position 16 and end at the position 22
+    lines[last_line_index] = lines[last_line_index][:16] + nbrofrow + lines[last_line_index][23:]
+    
     return lines
 
 def read_file(file_path):
